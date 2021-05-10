@@ -1,2 +1,7 @@
 .DS_Store
 data
+captcha.cap
+zk_java_client/.idea/*
+zk_java_client/output
+zk_java_client/target/*
+zk_java_client/zk-java_client.iml

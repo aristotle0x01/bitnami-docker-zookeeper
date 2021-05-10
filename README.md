@@ -109,3 +109,37 @@ services:
 
 
 
+# tcpdump数据分析
+
+## 创建tcpdump镜像
+
+为什么不直接使用本地命令呢？是为了方便通过“--net=container:your id” attach到其它container上
+
+**建立镜像**
+
+`docker build -t tcpdump - <<EOF 
+FROM ubuntu 
+RUN apt-get update && apt-get install -y tcpdump 
+VOLUME ["/tcpdump"]
+CMD tcpdump -i eth0 
+EOF`
+
+## 启动命令
+
+`docker run -v /your/local/folder:/tcpdump --tty --net=container:"your container id" tcpdump tcpdump -tttt -s0 -X -vv tcp port 2181 -w /tcpdump/captcha.cap`
+
+增加volume是为了将文件dump到本地便于wireshark分析
+
+**其它简单命令**
+
+```
+docker run --tty --net=container:6628d9a4e3e5 tcpdump
+docker run --tty --net=container:6628d9a4e3e5 tcpdump tcpdump -N -A 'port 8080'
+```
+
+## ref
+
+[How to TCPdump effectively in Docker](https://xxradar.medium.com/how-to-tcpdump-effectively-in-docker-2ed0a09b5406)
+
+[Using tcpdump With Docker](https://rmoff.net/2019/11/29/using-tcpdump-with-docker/)
+
