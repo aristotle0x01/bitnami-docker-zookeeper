@@ -5,3 +5,9 @@ zk_java_client/.idea/*
 zk_java_client/output
 zk_java_client/target/*
 zk_java_client/zk-java_client.iml
+zk.code-workspace
+zk_java_client/.classpath
+zk_java_client/.project
+zk_java_client/.settings/org.eclipse.jdt.apt.core.prefs
+zk_java_client/.settings/org.eclipse.jdt.core.prefs
+zk_java_client/.settings/org.eclipse.m2e.core.prefs

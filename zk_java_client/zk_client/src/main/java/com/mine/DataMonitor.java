@@ -5,6 +5,7 @@ package com.mine;
  * node. It uses asynchronous ZooKeeper APIs.
  */
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -57,6 +58,12 @@ public class DataMonitor implements Watcher, StatCallback {
                 // Something has changed on the node, let's find out
                 System.out.println("zk.exists 2");
                 zk.exists(znode, true, this, null);
+//                try{
+//                    List<String> list = zk.getChildren(znode, true);
+//                    System.out.println(znode + " children: " + " -" + list);
+//                }catch (Exception ex){
+//                }
+
             }
         }
         if (chainedWatcher != null) {
@@ -90,6 +97,8 @@ public class DataMonitor implements Watcher, StatCallback {
             try {
                 b = zk.getData(znode, false, null);
                 System.out.println(znode + ": " + new String(b) + " -" + stat.toString());
+//                List<String> list = zk.getChildren(znode, true);
+//                System.out.println(znode + " children: " + " -" + list);
             } catch (KeeperException e) {
                 // We don't need to worry about recovering now. The watch
                 // callbacks will kick off any exception handling
